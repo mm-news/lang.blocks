@@ -5,10 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lang.Blocks</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="drag_and_drop.js"></script>
 </head>
 
 <body>
-
+    <div class="center-box">
+        <div id="A" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 32px;width: 30vw;">
+            <!--A test for drag&drop-->
+            <div id="box1" class="draggable-box" draggable="true" ondragstart="drag(event)">
+                Drag me
+            </div>
+        </div>
+        <div id="B" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 32px; width: 30vw;">
+            <div id="box2" class="draggable-box" draggable="true" ondragstart="drag(event)">
+                Drag me too
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
