@@ -3,10 +3,12 @@ class Word {
      *
      * @param {String} partOfSpeech - Noun, Verb, etc.
      * @param {String} word - the word itself
+     * @param {JSON} sentenceArgs - the arguments for the sentence
      */
-    constructor(partOfSpeech, word) {
+    constructor(partOfSpeech, word, sentenceArgs) {
         this.partOfSpeech = partOfSpeech;
         this.word = word;
+        this.sentenceArgs = sentenceArgs;
         this.typeCheck(this.word, [String]);
     }
 
@@ -26,7 +28,7 @@ class Word {
     }
 
     /**
-     * 
+     * A function to check the type of a variable is in the array of classes
      * @param {Object} a The object to be checked
      * @param {Array[Object]} b The array of classes that a should be
      */
@@ -45,9 +47,10 @@ class Noun extends Word {
      * The constructor for Noun
      * @param {String} word The word itself
      * @param {Boolean} plural True for plural, False for singular
+     * @param {JSON} sentenceArgs The arguments for the sentence
      */
-    constructor(word, plural) {
-        super("Noun", word);
+    constructor(word, plural, sentenceArgs) {
+        super("Noun", word, sentenceArgs);
         this.plural = plural;
     }
 
@@ -70,9 +73,10 @@ class Verb extends Word {
      * @param {String} voice Active, Passive, etc.
      * @param {Boolean} infinitive True for infinitive, False for not infinitive
      * @param {String} aspect Simple, Progressive, etc.
+     * @param {JSON} sentenceArgs The arguments for the sentence
      */
-    constructor(word, tense, person, number, voice, infinitive, aspect) {
-        super("Verb", word);
+    constructor(word, tense, person, number, voice, infinitive, aspect, sentenceArgs) {
+        super("Verb", word, sentenceArgs);
         this.tense = tense;
         this.person = person;
         this.number = number;
@@ -132,14 +136,15 @@ class Adjective extends Word {
     /**
      * The constructor for Adjective
      * @param {String} word The word itself (original form)
-     * @param {Noun, Pronoun} adjacentWord The word that this adjective describes
+     * @param {Noun, Pronoun} nextWord The word that this adjective describes
      * @param {Number} kind 0 for original, 1 for comparative, 2 for superlative
+     * @param {JSON} sentenceArgs The arguments for the sentence
      */
-    constructor(word, adjacentWord, kind) {
-        super("Adjective", word);
-        this.adjacentWord = adjacentWord;
+    constructor(word, nextWord, kind, sentenceArgs) {
+        super("Adjective", word, sentenceArgs);
+        this.nextWord = nextWord;
         this.kind = kind;
-        this.typeCheck(this.adjacentWord, [Noun]);
+        this.typeCheck(this.nextWord, [Noun, Pronoun]);
     }
 
     get comparative() {
@@ -166,19 +171,65 @@ class Adverb extends Word {
      * The constructor for Adverb
      * @param {String} word The word itself
      * @param {Word} nextWord The word that this adverb describes
-     * @param {Array[String]} avaliableNextPOS The part of speech that the next word can be
+     * @param {Array[Object]} avaliableNextPOS The part of speech that the next word can be
+     * @param {JSON} sentenceArgs The arguments for the sentence
      */
-    constructor(word, nextWord, avaliableNextPOS) {
-        super("Adverb", word);
+    constructor(word, nextWord, avaliableNextPOS, sentenceArgs) {
+        super("Adverb", word, sentenceArgs);
         this.nextWord = nextWord;
         this.avaliableNextPOS = avaliableNextPOS;
-        if (!this.avaliableNextPOS.includes(this.nextWord.partOfSpeech)) {
-            throw new Error("Invalid part of speech");
-        }
+        this.typeCheck(this.nextWord, this.avaliableNextPOS);
     }
 }
 
-// TODO: Pronoun, Preposition, Conjunction, Article, Interjection
+class Pronoun extends Word {
+    /**
+     * The constructor for Pronoun
+     * @param {String} word The word itself
+     * @param {Number} person The person of the pronoun between 1 and 3
+     * @param {Boolean} plural True for plural, False for singular
+     * @param {JSON} sentenceArgs The arguments for the sentence
+     */
+    constructor(word, person, plural, sentenceArgs) {
+        super("Pronoun", word, sentenceArgs);
+        this.person = person;
+        this.plural = plural;
+    }
+}
+
+class Preposition extends Word {
+    constructor(word, nextWord) {
+        super("Preposition", word, sentenceArgs);
+        this.nextWord = nextWord;
+        this.typeCheck(this.nextWord, [Noun, Pronoun]);
+    }
+}
+
+class Conjunction extends Word {
+    constructor(word, previousWord, nextWord, sentenceArgs) {
+        super("Conjunction", word, sentenceArgs);
+        this.previousWord = previousWord;
+        this.nextWord = nextWord;
+    }
+}
+
+class Article extends Word {
+    constructor(word, nextWord, sentenceArgs) {
+        super("Article", word, sentenceArgs);
+        this.nextWord = nextWord;
+        this.typeCheck(this.nextWord, [Noun, Pronoun]);
+    }
+}
+
+class Interjection extends Word {
+    constructor(word, sentenceArgs) {
+        super("Interjection", word, sentenceArgs);
+    }
+
+    get render() {
+        return `<div>${this.word}</div>!`;
+    }
+}
 
 // Helper functions
 
