@@ -7,6 +7,7 @@ class Word {
     constructor(partOfSpeech, word) {
         this.partOfSpeech = partOfSpeech;
         this.word = word;
+        this.typeCheck(this.word, [String]);
     }
 
     get POS() {
@@ -22,6 +23,20 @@ class Word {
      */
     getPOSAbbr(lang) {
         return this.partOfSpeech; //TODO: Link to translate JSON file
+    }
+
+    /**
+     * 
+     * @param {Object} a The object to be checked
+     * @param {Array[Object]} b The array of classes that a should be
+     */
+    typeCheck(a, b) {
+        for (let i = 0; i < b.length; i++) {
+            if (a instanceof b[i]) {
+                return;
+            }
+        }
+        throw new Error("Invalid type");
     }
 }
 
@@ -113,33 +128,18 @@ class Verb extends Word {
     }
 }
 
-function addS(word) {
-    if (
-        word.endsWith("s") ||
-        word.endsWith("x") ||
-        word.endsWith("z") ||
-        word.endsWith("ch") ||
-        word.endsWith("sh")
-    ) {
-        return word + "es";
-    } else if (word.endsWith("y")) {
-        return word.slice(0, -1) + "ies";
-    } else {
-        return word + "s";
-    }
-}
-
 class Adjective extends Word {
     /**
      * The constructor for Adjective
      * @param {String} word The word itself (original form)
-     * @param {Noun, Pronoun} nextWord The word that this adjective describes
+     * @param {Noun, Pronoun} adjacentWord The word that this adjective describes
      * @param {Number} kind 0 for original, 1 for comparative, 2 for superlative
      */
-    constructor(word, nextWord, kind) {
+    constructor(word, adjacentWord, kind) {
         super("Adjective", word);
-        this.nextWord = nextWord;
+        this.adjacentWord = adjacentWord;
         this.kind = kind;
+        this.typeCheck(this.adjacentWord, [Noun]);
     }
 
     get comparative() {
@@ -179,3 +179,21 @@ class Adverb extends Word {
 }
 
 // TODO: Pronoun, Preposition, Conjunction, Article, Interjection
+
+// Helper functions
+
+function addS(word) {
+    if (
+        word.endsWith("s") ||
+        word.endsWith("x") ||
+        word.endsWith("z") ||
+        word.endsWith("ch") ||
+        word.endsWith("sh")
+    ) {
+        return word + "es";
+    } else if (word.endsWith("y")) {
+        return word.slice(0, -1) + "ies";
+    } else {
+        return word + "s";
+    }
+}
