@@ -2,6 +2,36 @@
 
 // Nouns subcategories
 
+class NotCountableNoun extends Noun {
+  constructor(word, sentenceArgs) {
+    super(word, false, sentenceArgs);
+  }
+}
+
+class CollectiveNoun extends NotCountableNoun {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class MeterialNoun extends NotCountableNoun {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class AbstractNoun extends NotCountableNoun {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class ProperNoun extends Noun {
+  constructor(word, plural, sentenceArgs) {
+    super(word, plural, sentenceArgs);
+  }
+}
+
 // Verbs subcategories
 
 // Adjectives subcategories
