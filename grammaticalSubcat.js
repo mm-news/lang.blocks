@@ -8,6 +8,27 @@ class NotCountableNoun extends Noun {
   }
 }
 
+class AnimateNoun extends Noun {
+  /**
+   * Animate noun class
+   * @param {String} word The word itself
+   * @param {Boolean} plural True for plural, False for singular
+   * @param {JSON} sentenceArgs
+   */
+  constructor(word, plural, sentenceArgs) {
+    super(word, plural, sentenceArgs);
+    this.possessive = this.toPossessive(word);
+  }
+
+  toPossessive(word) {
+    if (word.endsWith("s")) {
+      return word + "'";
+    } else {
+      return word + "'s";
+    }
+  }
+}
+
 class CollectiveNoun extends NotCountableNoun {
   constructor(word, sentenceArgs) {
     super(word, sentenceArgs);
@@ -66,7 +87,7 @@ class ReflexivePronoun extends Pronoun {
 
 class PersonalPronoun extends Pronoun {
   /**
-   * Personal pronouns are pronouns that are associated primarily with a particular person, in the grammatical sense.
+   * Personal pronoun class
    * @param {String} subjective The subjective case of the pronoun
    * @param {ObjectiveCasePronoun} objective The objective case of the pronoun
    * @param {PossessiveAdjective} possessiveA The possessive adjective of the pronoun

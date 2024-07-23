@@ -1,6 +1,12 @@
 // This file contains all the word classes
 // Nouns
+class Name extends AnimateNoun {
+  constructor(word, sentenceArgs) {
+    super(word, false, sentenceArgs);
+  }
 
+  // Update render
+}
 // Verbs
 
 // Adjectives
