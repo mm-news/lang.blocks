@@ -36,19 +36,43 @@ class ProperNoun extends Noun {
 
 // Adjectives subcategories
 
+class PossessiveAdjective extends Adjective {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
 // Adverbs subcategories
 
 // Pronouns subcategories
+
+class ObjectiveCasePronoun extends Pronoun {
+  constructor(word, person, plural, sentenceArgs) {
+    super(word, person, plural, sentenceArgs);
+  }
+}
+
+class PossessivePronoun extends Pronoun {
+  constructor(word, person, plural, sentenceArgs) {
+    super(word, person, plural, sentenceArgs);
+  }
+}
+
+class ReflexivePronoun extends Pronoun {
+  constructor(word, person, plural, sentenceArgs) {
+    super(word, person, plural, sentenceArgs);
+  }
+}
 
 class PersonalPronoun extends Pronoun {
   /**
    * Personal pronouns are pronouns that are associated primarily with a particular person, in the grammatical sense.
    * @param {String} subjective The subjective case of the pronoun
-   * @param {String} objective The objective case of the pronoun
-   * @param {Adjective} possessiveA The adjective possessive case of the pronoun
-   * @param {Noun} possessiveN The noun possessive case of the pronoun
-   * @param {String} reflexive The reflexive case of the pronoun
-   * @param {Number} person A number between 1 and 3 representing the person of the pronoun
+   * @param {ObjectiveCasePronoun} objective The objective case of the pronoun
+   * @param {PossessiveAdjective} possessiveA The possessive adjective of the pronoun
+   * @param {PossessivePronoun} possessiveN The possessive pronoun of the pronoun
+   * @param {ReflexivePronoun} reflexive The reflexive pronoun of the pronoun
+   * @param {Number} person The person of the pronoun between 1 and 3
    * @param {Boolean} plural True for plural, False for singular
    * @param {JSON} sentenceArgs The arguments for the sentence
    */
