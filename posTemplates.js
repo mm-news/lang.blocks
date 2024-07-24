@@ -17,7 +17,12 @@ class Word {
     return this.partOfSpeech;
   }
   get render() {
-    return `<div>${this.word}</div>`;
+    /** #(I, D)(word)
+     * I for input box
+     * D for div block
+     * e.g. #D(happy)
+     */
+    return `#D(${this.word})`;
   }
   /**
    * Get the abbreviation of the part of speech
@@ -63,9 +68,9 @@ class Noun extends NounLike {
 
   get render() {
     if (this.plural) {
-      return `<div>${addS(this.word)}</div>`;
+      return `#D(${addS(this.word)})`;
     } else {
-      return `<div>${this.word}</div>`;
+      return `#D(${this.word})`;
     }
   }
 }
@@ -152,13 +157,13 @@ class Verb extends Word {
       (this.voice === "Passive" && this.aspect === "Simple") ||
       (this.aspect === "Perfect" && this.tense !== "Continuous")
     ) {
-      return `<div>${this.pastTense}</div>`;
+      return `#D(${this.pastTense})`;
     } else if (this.aspect === "Continuous") {
-      return `<div>${this.continuousTense}</div>`;
+      return `#D(${this.continuousTense})`;
     } else if (this.person === 3 && this.plural === false) {
-      return `<div>${addS(this.word)}</div>`;
+      return `#D(${addS(this.word)})`;
     } else {
-      return `<div>${this.word}</div>`;
+      return `#D(${this.word})`;
     }
   }
 }
@@ -193,11 +198,11 @@ class Adjective extends NounModifier {
 
   get render() {
     if (this.kind === 1) {
-      return `<div>${this.comparative}</div>`;
+      return `#D(${this.comparative})`;
     } else if (this.kind === 2) {
-      return `<div>${this.superlative}</div>`;
+      return `#D(${this.superlative})`;
     } else {
-      return `<div>${this.word}</div>`;
+      return `#D(${this.word})`;
     }
   }
 }
@@ -244,7 +249,7 @@ class Interjection extends Word {
   }
 
   get render() {
-    return `<div>${this.word}</div>!`;
+    return `#D(${this.word})!`;
   }
 }
 
