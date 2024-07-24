@@ -34,6 +34,22 @@ class AnimateNoun extends Noun {
       return word + "'s";
     }
   }
+
+  get PossessiveAdj() {
+    return new PossessiveAdjective(
+      this.toPossessive(this.word),
+      this.sentenceArgs
+    );
+  }
+
+  get PossessivePro() {
+    return new PossessivePronoun(
+      this.toPossessive(this.word),
+      3,
+      this.plural,
+      this.sentenceArgs
+    );
+  }
 }
 
 class CollectiveNoun extends NotCountableNoun {
