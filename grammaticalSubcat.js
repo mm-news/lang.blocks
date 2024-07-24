@@ -3,8 +3,14 @@
 // Nouns subcategories
 
 class NotCountableNoun extends Noun {
-  constructor(word, sentenceArgs) {
-    super(word, false, sentenceArgs);
+  /**
+   * Not countable noun class
+   * @param {String} word The word itself
+   * @param {Determiner} modifier The determiner of the noun
+   * @param {JSON} sentenceArgs
+   */
+  constructor(word, modifier, sentenceArgs) {
+    super(word, false, modifier, sentenceArgs);
   }
 }
 
@@ -13,10 +19,11 @@ class AnimateNoun extends Noun {
    * Animate noun class
    * @param {String} word The word itself
    * @param {Boolean} plural True for plural, False for singular
+   * @param {Determiner} modifier The determiner of the noun
    * @param {JSON} sentenceArgs
    */
-  constructor(word, plural, sentenceArgs) {
-    super(word, plural, sentenceArgs);
+  constructor(word, plural, modifier, sentenceArgs) {
+    super(word, plural, modifier, sentenceArgs);
     this.possessive = this.toPossessive(word);
   }
 
@@ -30,26 +37,50 @@ class AnimateNoun extends Noun {
 }
 
 class CollectiveNoun extends NotCountableNoun {
-  constructor(word, sentenceArgs) {
-    super(word, sentenceArgs);
+  /**
+   * Collective noun class
+   * @param {String} word The word itself
+   * @param {Determiner} modifier The determiner of the noun
+   * @param {JSON} sentenceArgs
+   */
+  constructor(word, modifier, sentenceArgs) {
+    super(word, modifier, sentenceArgs);
   }
 }
 
 class MeterialNoun extends NotCountableNoun {
-  constructor(word, sentenceArgs) {
-    super(word, sentenceArgs);
+  /**
+   *
+   * @param {String} word The word itself
+   * @param {Determiner} modifier ZeroArticle, DefiniteArticle, Quantifier, etc.
+   * @param {JSON} sentenceArgs
+   */
+  constructor(word, modifier, sentenceArgs) {
+    super(word, modifier, sentenceArgs);
   }
 }
 
 class AbstractNoun extends NotCountableNoun {
-  constructor(word, sentenceArgs) {
-    super(word, sentenceArgs);
+  /**
+   *
+   * @param {String} word The word itself
+   * @param {Determiner} modifier
+   * @param {JSON} sentenceArgs
+   */
+  constructor(word, modifier, sentenceArgs) {
+    super(word, modifier, sentenceArgs);
   }
 }
 
 class ProperNoun extends Noun {
+  /**
+   *
+   * @param {String} word The word itself
+   * @param {Boolean} plural True for plural, False for singular
+   * @param {JSON} sentenceArgs
+   */
   constructor(word, plural, sentenceArgs) {
-    super(word, plural, sentenceArgs);
+    super(word, plural, new ZeroArticle(sentenceArgs), sentenceArgs);
   }
 }
 
@@ -119,8 +150,26 @@ class PersonalPronoun extends Pronoun {
 
 // Conjunctions subcategories
 
-// Articles subcategories
+// Determiner subcategories
 
+//TODO: Render function
+class DefiniteArticle extends Determiner {
+  constructor(sentenceArgs) {
+    super("the", sentenceArgs);
+  }
+}
+
+class IndefiniteArticle extends Determiner {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class ZeroArticle extends Determiner {
+  constructor(sentenceArgs) {
+    super("", sentenceArgs);
+  }
+}
 // Interjections subcategories
 
 // Helper functions

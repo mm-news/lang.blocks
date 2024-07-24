@@ -38,11 +38,13 @@ class Noun extends Word {
    * The constructor for Noun
    * @param {String} word The word itself
    * @param {Boolean} plural True for plural, False for singular
+   * @param {Determiner} modifier The determiner of the noun
    * @param {JSON} sentenceArgs The arguments for the sentence
    */
-  constructor(word, plural, sentenceArgs) {
+  constructor(word, plural, modifier, sentenceArgs) {
     super("Noun", word, sentenceArgs);
     this.plural = plural;
+    this.modifier = modifier;
   }
 
   get render() {
@@ -210,12 +212,6 @@ class Conjunction extends Word {
   }
 }
 
-class Article extends Word {
-  constructor(word, sentenceArgs) {
-    super("Article", word, sentenceArgs);
-  }
-}
-
 class Interjection extends Word {
   constructor(word, sentenceArgs) {
     super("Interjection", word, sentenceArgs);
@@ -223,6 +219,12 @@ class Interjection extends Word {
 
   get render() {
     return `<div>${this.word}</div>!`;
+  }
+}
+
+class Determiner extends Word {
+  constructor(word, sentenceArgs) {
+    super("Determiner", word, sentenceArgs);
   }
 }
 
