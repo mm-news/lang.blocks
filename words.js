@@ -1,8 +1,8 @@
-// This file contains all the word classes
+// @ts-check This file contains all the word classes
 // Nouns
 class Name extends AnimateNoun {
   constructor(word, sentenceArgs) {
-    super(word, false, sentenceArgs);
+    super(word, false, new ZeroArticle(sentenceArgs), sentenceArgs);
   }
 
   // Update render

@@ -1,3 +1,5 @@
+// @ts-check
+
 class Word {
   /**
    *
@@ -198,7 +200,7 @@ class Pronoun extends Word {
 }
 
 class Preposition extends Word {
-  constructor(word, nextWord) {
+  constructor(word, nextWord, sentenceArgs) {
     super("Preposition", word, sentenceArgs);
     this.nextWord = nextWord;
   }

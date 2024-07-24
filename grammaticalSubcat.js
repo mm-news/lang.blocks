@@ -1,4 +1,4 @@
-// This file contains the functions that are used to generate the grammatical subcategories for the grammar rules.
+// @ts-check This file contains the functions that are used to generate the grammatical subcategories for the grammar rules.
 
 // Nouns subcategories
 
@@ -105,8 +105,8 @@ class ProperNoun extends Noun {
 // Adjectives subcategories
 
 class PossessiveAdjective extends Adjective {
-  constructor(word, sentenceArgs) {
-    super(word, sentenceArgs);
+  constructor(word, nextWord, sentenceArgs) {
+    super(word, nextWord, 0, sentenceArgs);
   }
 }
 
