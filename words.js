@@ -20,7 +20,7 @@ class I extends PersonalPronoun {
     super(
       "I",
       new ObjectiveCasePronoun("me", 1, false, sentenceArgs),
-      new PossessiveAdjective("my", sentenceArgs),
+      new PossessiveDeterminer("my", sentenceArgs),
       new PossessivePronoun("mine", 1, false, sentenceArgs),
       new ReflexivePronoun("myself", 1, false, sentenceArgs),
       1,
@@ -35,7 +35,7 @@ class SingularYou extends PersonalPronoun {
     super(
       "you",
       new ObjectiveCasePronoun("you", 2, false, sentenceArgs),
-      new PossessiveAdjective("your", sentenceArgs),
+      new PossessiveDeterminer("your", sentenceArgs),
       new PossessivePronoun("yours", 2, false, sentenceArgs),
       new ReflexivePronoun("yourself", 2, false, sentenceArgs),
       2,
@@ -50,7 +50,7 @@ class He extends PersonalPronoun {
     super(
       "he",
       new ObjectiveCasePronoun("him", 3, false, sentenceArgs),
-      new PossessiveAdjective("his", sentenceArgs),
+      new PossessiveDeterminer("his", sentenceArgs),
       new PossessivePronoun("his", 3, false, sentenceArgs),
       new ReflexivePronoun("himself", 3, false, sentenceArgs),
       3,
@@ -65,7 +65,7 @@ class She extends PersonalPronoun {
     super(
       "she",
       new ObjectiveCasePronoun("her", 3, false, sentenceArgs),
-      new PossessiveAdjective("her", sentenceArgs),
+      new PossessiveDeterminer("her", sentenceArgs),
       new PossessivePronoun("hers", 3, false, sentenceArgs),
       new ReflexivePronoun("herself", 3, false, sentenceArgs),
       3,
@@ -80,7 +80,7 @@ class It extends PersonalPronoun {
     super(
       "it",
       new ObjectiveCasePronoun("it", 3, false, sentenceArgs),
-      new PossessiveAdjective("its", sentenceArgs),
+      new PossessiveDeterminer("its", sentenceArgs),
       new PossessivePronoun("its", 3, false, sentenceArgs),
       new ReflexivePronoun("itself", 3, false, sentenceArgs),
       3,
@@ -95,7 +95,7 @@ class We extends PersonalPronoun {
     super(
       "we",
       new ObjectiveCasePronoun("us", 1, true, sentenceArgs),
-      new PossessiveAdjective("our", sentenceArgs),
+      new PossessiveDeterminer("our", sentenceArgs),
       new PossessivePronoun("ours", 1, true, sentenceArgs),
       new ReflexivePronoun("ourselves", 1, true, sentenceArgs),
       1,
@@ -110,7 +110,7 @@ class PluralYou extends PersonalPronoun {
     super(
       "you",
       new ObjectiveCasePronoun("you", 2, true, sentenceArgs),
-      new PossessiveAdjective("your", sentenceArgs),
+      new PossessiveDeterminer("your", sentenceArgs),
       new PossessivePronoun("yours", 2, true, sentenceArgs),
       new ReflexivePronoun("yourselves", 2, true, sentenceArgs),
       2,
@@ -125,7 +125,7 @@ class They extends PersonalPronoun {
     super(
       "they",
       new ObjectiveCasePronoun("them", 3, true, sentenceArgs),
-      new PossessiveAdjective("their", sentenceArgs),
+      new PossessiveDeterminer("their", sentenceArgs),
       new PossessivePronoun("theirs", 3, true, sentenceArgs),
       new ReflexivePronoun("themselves", 3, true, sentenceArgs),
       3,

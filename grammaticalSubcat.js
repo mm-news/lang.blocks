@@ -36,7 +36,7 @@ class AnimateNoun extends Noun {
   }
 
   get PossessiveAdj() {
-    return new PossessiveAdjective(
+    return new PossessiveDeterminer(
       this.toPossessive(this.word),
       this.sentenceArgs
     );
@@ -104,12 +104,6 @@ class ProperNoun extends Noun {
 
 // Adjectives subcategories
 
-class PossessiveAdjective extends Adjective {
-  constructor(word, nextWord, sentenceArgs) {
-    super(word, nextWord, 0, sentenceArgs);
-  }
-}
-
 // Adverbs subcategories
 
 // Pronouns subcategories
@@ -137,7 +131,7 @@ class PersonalPronoun extends Pronoun {
    * Personal pronoun class
    * @param {String} subjective The subjective case of the pronoun
    * @param {ObjectiveCasePronoun} objective The objective case of the pronoun
-   * @param {PossessiveAdjective} possessiveA The possessive adjective of the pronoun
+   * @param {PossessiveDeterminer} possessiveD The possessive determiner of the pronoun
    * @param {PossessivePronoun} possessiveN The possessive pronoun of the pronoun
    * @param {ReflexivePronoun} reflexive The reflexive pronoun of the pronoun
    * @param {Number} person The person of the pronoun between 1 and 3
@@ -147,7 +141,7 @@ class PersonalPronoun extends Pronoun {
   constructor(
     subjective,
     objective,
-    possessiveA,
+    possessiveD,
     possessiveN,
     reflexive,
     person,
@@ -157,7 +151,7 @@ class PersonalPronoun extends Pronoun {
     super(subjective, person, plural, sentenceArgs);
     this.subjective = subjective;
     this.objective = objective;
-    this.possessiveA = possessiveA;
+    this.possessiveD = possessiveD;
     this.possessiveN = possessiveN;
     this.reflexive = reflexive;
   }
@@ -186,6 +180,31 @@ class ZeroArticle extends Determiner {
     super("", sentenceArgs);
   }
 }
+
+class Quantifier extends Determiner {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class Numeral extends Determiner {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class PossessiveDeterminer extends Determiner {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
+class DemonstrativeDeterminer extends Determiner {
+  constructor(word, sentenceArgs) {
+    super(word, sentenceArgs);
+  }
+}
+
 // Interjections subcategories
 
 // Helper functions
