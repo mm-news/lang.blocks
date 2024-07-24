@@ -9,6 +9,69 @@ class Name extends AnimateNoun {
 }
 // Verbs
 
+class Be extends LinkingVerb {
+  constructor(
+    word,
+    complement,
+    tense,
+    person,
+    plural,
+    voice,
+    infinitive,
+    aspect,
+    sentenceArgs
+  ) {
+    super(
+      word,
+      complement,
+      tense,
+      person,
+      plural,
+      voice,
+      infinitive,
+      aspect,
+      sentenceArgs
+    );
+  }
+
+  get pastTense() {
+    if (this.plural || this.person === 2) {
+      return "were";
+    }
+    return "was";
+  }
+
+  get render() {
+    let ret = "";
+
+    if (this.infinitive) {
+      ret = "be";
+    } else if (this.aspect === "Continuous") {
+      ret = "being";
+    } else if (this.aspect === "Perfect") {
+      ret = "been";
+    } else {
+      switch (this.tense) {
+        case "Past":
+          ret = this.pastTense;
+          break;
+        case "Present":
+          if (this.plural || this.person === 2) {
+            ret = "are";
+            break;
+          } else if (this.person === 1) {
+            ret = "am";
+            break;
+          } else {
+            ret = "is";
+            break;
+          }
+      }
+    }
+    return `<div>${ret}</div>`;
+  }
+}
+
 // Adjectives
 
 // Adverbs

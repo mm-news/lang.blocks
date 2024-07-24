@@ -91,7 +91,7 @@ class Verb extends Word {
    * @param {String} word The word itself(infinitive form)
    * @param {String} tense Present, Past, Future, etc.
    * @param {Number} person 1, 2, 3
-   * @param {Boolean} number True for singular, False for plural
+   * @param {Boolean} plural True for plural, False for singular
    * @param {String} voice Active, Passive, etc.
    * @param {Boolean} infinitive True for infinitive, False for not infinitive
    * @param {String} aspect Simple, Progressive, etc.
@@ -101,7 +101,7 @@ class Verb extends Word {
     word,
     tense,
     person,
-    number,
+    plural,
     voice,
     infinitive,
     aspect,
@@ -110,7 +110,7 @@ class Verb extends Word {
     super("Verb", word, sentenceArgs);
     this.tense = tense;
     this.person = person;
-    this.number = number;
+    this.plural = plural;
     this.voice = voice;
     this.infinitive = infinitive;
     this.aspect = aspect;
@@ -155,7 +155,7 @@ class Verb extends Word {
       return `<div>${this.pastTense}</div>`;
     } else if (this.aspect === "Continuous") {
       return `<div>${this.continuousTense}</div>`;
-    } else if (this.person === 3 && this.number === true) {
+    } else if (this.person === 3 && this.plural === false) {
       return `<div>${addS(this.word)}</div>`;
     } else {
       return `<div>${this.word}</div>`;

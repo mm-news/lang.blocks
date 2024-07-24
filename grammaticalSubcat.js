@@ -102,6 +102,35 @@ class ProperNoun extends Noun {
 
 // Verbs subcategories
 
+class LinkingVerb extends Verb {
+  /**
+   * The constructor for Linking Verb
+   * @param {String} word The word itself(infinitive form)
+   * @param {Word} complement Adj, Noun, etc.
+   * @param {String} tense Present, Past, Future, etc.
+   * @param {Number} person 1, 2, 3
+   * @param {Boolean} plural True for plural, False for singular
+   * @param {String} voice Active, Passive, etc.
+   * @param {Boolean} infinitive True for infinitive, False for not infinitive
+   * @param {String} aspect Simple, Progressive, etc.
+   * @param {JSON} sentenceArgs The arguments for the sentence
+   */
+  constructor(
+    word,
+    complement,
+    tense,
+    person,
+    plural,
+    voice,
+    infinitive,
+    aspect,
+    sentenceArgs
+  ) {
+    super(word, tense, person, plural, voice, infinitive, aspect, sentenceArgs);
+    this.complement = complement;
+  }
+}
+
 // Adjectives subcategories
 
 // Adverbs subcategories
