@@ -6,7 +6,7 @@ class NotCountableNoun extends Noun {
   /**
    * Not countable noun class
    * @param {String} word The word itself
-   * @param {Determiner} modifier The determiner of the noun
+   * @param {NounModifier} modifier The modifier of the noun
    * @param {JSON} sentenceArgs
    */
   constructor(word, modifier, sentenceArgs) {
@@ -19,7 +19,7 @@ class AnimateNoun extends Noun {
    * Animate noun class
    * @param {String} word The word itself
    * @param {Boolean} plural True for plural, False for singular
-   * @param {Determiner} modifier The determiner of the noun
+   * @param {NounModifier} modifier The modifier of the noun
    * @param {JSON} sentenceArgs
    */
   constructor(word, plural, modifier, sentenceArgs) {
@@ -56,7 +56,7 @@ class CollectiveNoun extends NotCountableNoun {
   /**
    * Collective noun class
    * @param {String} word The word itself
-   * @param {Determiner} modifier The determiner of the noun
+   * @param {NounModifier} modifier The modifier of the noun
    * @param {JSON} sentenceArgs
    */
   constructor(word, modifier, sentenceArgs) {
@@ -64,11 +64,11 @@ class CollectiveNoun extends NotCountableNoun {
   }
 }
 
-class MeterialNoun extends NotCountableNoun {
+class MaterialNoun extends NotCountableNoun {
   /**
    *
    * @param {String} word The word itself
-   * @param {Determiner} modifier ZeroArticle, DefiniteArticle, Quantifier, etc.
+   * @param {NounModifier} modifier ZeroArticle, DefiniteArticle, Quantifier, etc.
    * @param {JSON} sentenceArgs
    */
   constructor(word, modifier, sentenceArgs) {
@@ -80,7 +80,7 @@ class AbstractNoun extends NotCountableNoun {
   /**
    *
    * @param {String} word The word itself
-   * @param {Determiner} modifier
+   * @param {NounModifier} modifier
    * @param {JSON} sentenceArgs
    */
   constructor(word, modifier, sentenceArgs) {

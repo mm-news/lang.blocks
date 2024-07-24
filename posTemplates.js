@@ -52,7 +52,7 @@ class Noun extends NounLike {
    * The constructor for Noun
    * @param {String} word The word itself
    * @param {Boolean} plural True for plural, False for singular
-   * @param {Determiner} modifier The determiner of the noun
+   * @param {NounModifier} modifier The determiner of the noun
    * @param {JSON} sentenceArgs The arguments for the sentence
    */
   constructor(word, plural, modifier, sentenceArgs) {
@@ -163,7 +163,13 @@ class Verb extends Word {
   }
 }
 
-class Adjective extends Word {
+class NounModifier extends Word {
+  constructor(partOfSpeech, word, sentenceArgs) {
+    super(partOfSpeech, word, sentenceArgs);
+  }
+}
+
+class Adjective extends NounModifier {
   /**
    * The constructor for Adjective
    * @param {String} word The word itself (original form)
@@ -193,6 +199,12 @@ class Adjective extends Word {
     } else {
       return `<div>${this.word}</div>`;
     }
+  }
+}
+
+class Determiner extends NounModifier {
+  constructor(word, sentenceArgs) {
+    super("Determiner", word, sentenceArgs);
   }
 }
 
@@ -233,12 +245,6 @@ class Interjection extends Word {
 
   get render() {
     return `<div>${this.word}</div>!`;
-  }
-}
-
-class Determiner extends Word {
-  constructor(word, sentenceArgs) {
-    super("Determiner", word, sentenceArgs);
   }
 }
 
