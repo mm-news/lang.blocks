@@ -35,7 +35,19 @@ class Word {
    */
 }
 
-class Noun extends Word {
+class NounLike extends Word {
+  /**
+   *
+   * @param {String} partOfSpeech - Noun, Pronoun, etc.
+   * @param {String} word The word itself
+   * @param {JSON} sentenceArgs
+   */
+  constructor(partOfSpeech, word, sentenceArgs) {
+    super(partOfSpeech, word, sentenceArgs);
+  }
+}
+
+class Noun extends NounLike {
   /**
    * The constructor for Noun
    * @param {String} word The word itself
@@ -55,6 +67,21 @@ class Noun extends Word {
     } else {
       return `<div>${this.word}</div>`;
     }
+  }
+}
+
+class Pronoun extends NounLike {
+  /**
+   * The constructor for Pronoun
+   * @param {String} word The word itself
+   * @param {Number} person The person of the pronoun between 1 and 3
+   * @param {Boolean} plural True for plural, False for singular
+   * @param {JSON} sentenceArgs The arguments for the sentence
+   */
+  constructor(word, person, plural, sentenceArgs) {
+    super("Pronoun", word, sentenceArgs);
+    this.person = person;
+    this.plural = plural;
   }
 }
 
@@ -140,7 +167,7 @@ class Adjective extends Word {
   /**
    * The constructor for Adjective
    * @param {String} word The word itself (original form)
-   * @param {Noun, Pronoun} nextWord The word that this adjective describes
+   * @param {NounLike} nextWord The word that this adjective describes
    * @param {Number} kind 0 for original, 1 for comparative, 2 for superlative
    * @param {JSON} sentenceArgs The arguments for the sentence
    */
@@ -181,21 +208,6 @@ class Adverb extends Word {
     super("Adverb", word, sentenceArgs);
     this.nextWord = nextWord;
     this.avaliableNextPOS = avaliableNextPOS;
-  }
-}
-
-class Pronoun extends Word {
-  /**
-   * The constructor for Pronoun
-   * @param {String} word The word itself
-   * @param {Number} person The person of the pronoun between 1 and 3
-   * @param {Boolean} plural True for plural, False for singular
-   * @param {JSON} sentenceArgs The arguments for the sentence
-   */
-  constructor(word, person, plural, sentenceArgs) {
-    super("Pronoun", word, sentenceArgs);
-    this.person = person;
-    this.plural = plural;
   }
 }
 
