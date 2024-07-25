@@ -9,33 +9,52 @@ class Sentence {
     this.predicate = p;
   }
 
-  render() {
-    let subj = this.subject.render;
-    let pred = this.predicate.render;
-    let reg = /#([DI])\(([a-z<>/]+)\)/;
-    let retS = "";
-    let retP = "";
-    let cur;
+  get render() {
+    let reg = /#([DI])\(([a-zA-Z]+)\)/;
+    return `<div class="S">${this.renderSentence(
+      this.subject.render,
+      reg
+    )}</div><div class="P">${this.renderSentence(
+      this.predicate.render,
+      reg
+    )}</div>`;
+  }
 
-    while (!("#" in subj)) {
-      cur = subj.match(reg);
+  /**
+   * @param {String} inp - The input string e.g. `#D(is#D(open) #D(now) )`
+   * @param {RegExp} reg - The regex to match the input string
+   */
+  renderSentence(inp, reg) {
+    if (!inp.includes("#")) {
+      return inp;
+    }
+    let ret = "";
+    let cur;
+    while (inp.includes("#")) {
+      cur = inp.match(reg);
+      console.log(cur);
       let prev;
-      if (cur["index"] === 0) {
-        prev = null;
-      } else {
-        prev = subj[cur["index"] - 1];
-      }
-      if (prev !== "(") {
+      prev = inp[cur["index"] - 1] || null;
+      if (prev !== null) {
         /** This means the match is in the same level (like `#D(is#D(open) *#D(now)* )`)*/
         if (cur[1] === "D") {
-          retS += `<div>${cur[2]}</div>`;
+          ret = `${ret}<div>${cur[2]}</div>`;
         } else if (cur[1] === "I") {
-          retS += `<input type="text" value="${cur[1]}">`;
+          ret = `${ret}<input type="text" value="${cur[2]}">`;
+        }
+      } else {
+        /** This means the match is in a nested level (like `#D( *is#D(open)* #D(now) )`)*/
+        if (cur[1] === "D") {
+          ret = `<div>${cur[2]}${ret}</div>`;
+        } else if (cur[1] === "I") {
+          ret = `<div><input type="text" value="${cur[2]}">${ret}</div>`;
         }
       }
+      inp = `${inp.slice(0, cur["index"])}${inp.slice(
+        cur["index"] + cur[0].length
+      )}`;
     }
-
-    return;
+    return ret;
   }
 }
 
